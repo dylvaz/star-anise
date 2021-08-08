@@ -1,9 +1,9 @@
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const mongoose = require("mongoose");
-const { googleClientID, googleClientSecret } = require("../config/keys");
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const mongoose = require('mongoose');
+const { googleClientID, googleClientSecret } = require('../config/keys');
 
-const User = mongoose.model("users");
+const User = mongoose.model('users');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -18,7 +18,7 @@ passport.use(
     {
       clientID: googleClientID,
       clientSecret: googleClientSecret,
-      callbackURL: "/auth/google/callback",
+      callbackURL: '/auth/google/callback',
       proxy: true, // required for heroku
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -32,6 +32,6 @@ passport.use(
         imageUrl: profile.photos[0].value,
       }).save();
       done(null, newUser);
-    }
-  )
+    },
+  ),
 );

@@ -8,7 +8,9 @@
     "npm": "7.15.1"
   },
   "scripts": {
-    "start": "nodemon -r dotenv/config index.js"
+    "client": "npm run start --prefix client",
+    "server": "nodemon -r dotenv/config index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,11 @@
     "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
+    "concurrently": "^6.2.0",
     "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
     "nodemon": "^2.0.12"
   },
   "bugs": {
