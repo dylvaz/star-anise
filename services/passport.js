@@ -31,7 +31,7 @@ passport.use(
         displayName: profile.displayName,
         imageUrl: profile.photos[0].value,
       }).save();
-      done(null, newUser);
+      return done(null, newUser);
     },
   ),
 );
