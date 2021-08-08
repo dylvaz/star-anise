@@ -6,6 +6,7 @@ const userSchema = new Schema({
   googleID: String,
   displayName: String,
   imageUrl: String,
+  username: String,
 });
 
 mongoose.model('users', userSchema);
