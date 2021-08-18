@@ -2,6 +2,20 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+const email = {
+  type: String,
+  trim: true,
+  lowercase: true,
+  unique: true,
+  required: true,
+  match: [/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Please fill a valid email address'],
+};
+
+const localSchema = new Schema({
+  email,
+  password: { type: String, required: true },
+});
+
 const userSchema = new Schema({
   google: {
     id: String,
@@ -10,11 +24,11 @@ const userSchema = new Schema({
     id: String,
   },
   local: {
-    email: String,
-    password: String,
+    type: localSchema,
+    required: false,
   },
-  email: String,
-  displayName: String,
+  email,
+  displayName: { type: String, required: true },
   avatar: String,
 });
 

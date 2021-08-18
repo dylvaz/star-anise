@@ -1,12 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 const passport = require('passport');
 const bcrypt = require('bcrypt');
-const randomAnimalName = require('random-animal-name');
-
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 
 const mongoose = require('mongoose');
+const initDisplayName = require('./displayName');
+
 const { clientID: googleClientID, clientSecret: googleClientSecret } = require('../config').googleOAuth;
 
 const User = mongoose.model('users');
@@ -52,11 +52,10 @@ passport.use(
         return done(null, user);
       }
 
-      const initialName = `${randomAnimalName().toLowerCase().replace(' ', '')}${Math.floor(Math.random() * 999)}`;
       const newUser = await new User({
         google: { id: profile.id },
         email: profile._json.email,
-        displayName: initialName,
+        displayName: initDisplayName(),
         avatar: profile._json.picture,
       }).save();
 
