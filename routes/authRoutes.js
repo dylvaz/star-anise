@@ -2,7 +2,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const requireAuth = require('../middleware/requireAuth');
-const initDisplayName = require('../services/displayName');
+const randomDisplayName = require('../services/randomDisplayName');
 
 const User = mongoose.model('users');
 
@@ -74,7 +74,7 @@ module.exports = (app) => {
           password: hashedPassword,
         },
         email,
-        displayName: initDisplayName(),
+        displayName: randomDisplayName(),
       }).save();
       user.local.password = undefined;
       res.send(user);

@@ -5,7 +5,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 
 const mongoose = require('mongoose');
-const initDisplayName = require('./displayName');
+const randomDisplayName = require('./randomDisplayName');
 
 const { clientID: googleClientID, clientSecret: googleClientSecret } = require('../config').googleOAuth;
 
@@ -55,7 +55,7 @@ passport.use(
       const newUser = await new User({
         google: { id: profile.id },
         email: profile._json.email,
-        displayName: initDisplayName(),
+        displayName: randomDisplayName(),
         avatar: profile._json.picture,
       }).save();
 
