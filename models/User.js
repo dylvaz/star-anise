@@ -10,7 +10,7 @@ const userSchema = new Schema({
     id: String,
   },
   local: {
-    username: String,
+    email: String,
     password: String,
   },
   email: String,
@@ -22,7 +22,7 @@ const userSchema = new Schema({
 userSchema.pre('validate', function (next) {
   if (!this.google.id
     && !this.facebook.id
-    && (!this.local.username && !this.local.password)
+    && (!this.local.email && !this.local.password)
   ) {
     return next(new Error('At least one identity provider is required.'));
   }
