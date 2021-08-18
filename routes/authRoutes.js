@@ -31,24 +31,6 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
-  app.get('/login', (req, res) => {
-    res.send(`
-    <form action="/login/password" method="post">
-    <div>
-        <label>Email:</label>
-        <input type="text" name="email"/>
-    </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
-    </div>
-    <div>
-        <input type="submit" value="Log In"/>
-    </div>
-</form>
-    `);
-  });
-
   app.post('/login/password',
     passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }),
     (req, res) => {
