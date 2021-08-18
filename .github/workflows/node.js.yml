@@ -19,4 +19,5 @@ jobs:
         cache: 'npm'
     - run: npm install --include-dev
     - run: npm run lint
+    - run: npm run test
     
