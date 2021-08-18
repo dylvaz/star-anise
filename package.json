@@ -8,7 +8,7 @@
     "npm": "7.15.1"
   },
   "scripts": {
-    "start": "nodemon -r dotenv/config index.js"
+    "dev": "nodemon -r dotenv/config index.js"
   },
   "repository": {
     "type": "git",
@@ -17,14 +17,19 @@
   "author": "pumpadrian@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
     "mongoose": "^5.13.3",
     "passport": "^0.4.1",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.0",
     "nodemon": "^2.0.12"
   },
   "bugs": {
