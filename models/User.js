@@ -1,11 +1,32 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  googleID: String,
+  google: {
+    id: String,
+  },
+  facebook: {
+    id: String,
+  },
+  local: {
+    email: String,
+    password: String,
+  },
+  email: String,
   displayName: String,
-  imageUrl: String,
+  avatar: String,
 });
 
-mongoose.model("users", userSchema);
+// eslint-disable-next-line func-names
+userSchema.pre('validate', function (next) {
+  if (!this.google.id
+    && !this.facebook.id
+    && (!this.local.email && !this.local.password)
+  ) {
+    return next(new Error('At least one identity provider is required.'));
+  }
+  return next();
+});
+
+mongoose.model('users', userSchema);
