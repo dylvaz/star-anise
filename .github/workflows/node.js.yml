@@ -18,6 +18,8 @@ jobs:
         node-version: '16'
         cache: 'npm'
     - run: npm install --include-dev
+    - run: npm install --include-dev --prefix client
     - run: npm run lint
     - run: npm run test
+    - run: npm run heroku-postbuild
     
