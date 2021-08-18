@@ -39,9 +39,13 @@ module.exports = (app) => {
     });
 
   app.post('/signup', async (req, res) => {
+    if (req.user) {
+      return res.status(400).send('already signed in');
+    }
+
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.send(400, 'email and password are required for signup');
+      return res.status(400).send('email and password are required for signup');
     }
 
     const salt = await bcrypt.genSalt(10);
