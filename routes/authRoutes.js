@@ -22,6 +22,21 @@ module.exports = (app) => {
     },
   );
 
+  app.get(
+    '/auth/facebook',
+    passport.authenticate('facebook', {
+      scope: ['public_profile', 'email'],
+    }),
+  );
+
+  app.get(
+    '/auth/facebook/callback',
+    passport.authenticate('facebook', {
+      successRedirect: '/',
+      failureRedirect: '/login',
+    }),
+  );
+
   app.get('/whoami', requireAuth, (req, res) => {
     res.send(req.user);
   });
@@ -31,11 +46,16 @@ module.exports = (app) => {
     res.redirect('/');
   });
 
-  app.post('/login/password',
-    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }),
+  app.post(
+    '/login/password',
+    passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/login',
+    }),
     (req, res) => {
       res.redirect('/');
-    });
+    },
+  );
 
   app.post('/signup', async (req, res) => {
     if (req.user) {
