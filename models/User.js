@@ -6,13 +6,16 @@ const email = {
   type: String,
   trim: true,
   lowercase: true,
-  unique: true,
   required: true,
   match: [/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Please fill a valid email address'],
 };
 
 const localSchema = new Schema({
-  email,
+  email: {
+    ...email,
+    unique: true,
+    sparse: true,
+  },
   password: { type: String, required: true },
 });
 
