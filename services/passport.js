@@ -72,6 +72,7 @@ passport.use(
     clientSecret: facebookClientSecret,
     callbackURL: '/auth/facebook/callback',
     profileFields: ['id', 'email', 'photos'],
+    proxy: true, // required for heroku
   },
   async (accessToken, refreshToken, profile, done) => {
     const user = await User.findOne({ 'facebook.id': profile.id });
