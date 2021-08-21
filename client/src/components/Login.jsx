@@ -60,17 +60,6 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const res = await fetch('/login/password', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-    });
-    console.log(res);
-    const body = await res.json();
-    console.log(body);
-  };
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -81,7 +70,7 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form onSubmit={handleSubmit} className={classes.form} noValidate>
+        <form method="post" action="/login/password" className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"

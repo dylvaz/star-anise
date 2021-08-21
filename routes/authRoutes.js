@@ -47,11 +47,7 @@ module.exports = (app) => {
   });
 
   app.post(
-    '/login/password',
-    passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: '/login',
-    }),
+    '/login/password', passport.authenticate('local'),
     (req, res) => {
       res.redirect('/');
     },
