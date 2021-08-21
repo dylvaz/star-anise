@@ -2,12 +2,14 @@
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 
 const mongoose = require('mongoose');
 const randomDisplayName = require('./randomDisplayName');
 
 const { clientID: googleClientID, clientSecret: googleClientSecret } = require('../config').googleOAuth;
+const { clientID: facebookClientID, clientSecret: facebookClientSecret } = require('../config').facebookOAuth;
 
 const User = mongoose.model('users');
 
@@ -54,12 +56,36 @@ passport.use(
 
       const newUser = await new User({
         google: { id: profile.id },
-        email: profile._json.email,
+        email: profile.emails[0].value,
         displayName: randomDisplayName(),
-        avatar: profile._json.picture,
+        avatar: profile.photos[0].value,
       }).save();
 
       done(null, newUser);
     },
   ),
+);
+
+passport.use(
+  new FacebookStrategy({
+    clientID: facebookClientID,
+    clientSecret: facebookClientSecret,
+    callbackURL: '/auth/facebook/callback',
+    profileFields: ['id', 'email', 'photos'],
+  },
+  async (accessToken, refreshToken, profile, done) => {
+    const user = await User.findOne({ 'facebook.id': profile.id });
+    if (user) {
+      return done(null, user);
+    }
+
+    const newUser = await new User({
+      facebook: { id: profile.id },
+      email: profile.emails[0].value,
+      displayName: randomDisplayName(),
+      avatar: profile.photos[0].value,
+    }).save();
+
+    done(null, newUser);
+  }),
 );

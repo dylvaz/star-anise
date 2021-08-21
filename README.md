@@ -24,6 +24,8 @@ MONGO_URI=
 COOKIE_KEY=
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
+FACEBOOK_CLIENT_ID=
+FACEBOOK_CLIENT_SECRET=
 ```
 
 Start the application in development mode
@@ -32,7 +34,13 @@ Start the application in development mode
 npm run dev
 ```
 
-This will start the react frontend on http://localhost:3000 and the node.js backend on http://localhost:5000. In development, you should access the application through the react frontend. The frontend will proxy requests to the backend during development. In production, the react frontend is compiled to a static set of assets contained in the `build/` folder, and these will be served directly from our backend.
+This will start the react frontend on http://localhost:3000 and the node.js backend on http://localhost:5000. In development, you should access the application through the react frontend. The frontend will proxy requests to the backend during development.
+
+In production, the react frontend is compiled into a static set of assets saved to the `build/` folder. These will be served directly by our node.js backend.
+
+## Deployment
+
+The application is deployed continuously to *Heroku* and triggered by commits to the `main` branch. Check the repo description for the URL.
 
 ## Set up linting
 
