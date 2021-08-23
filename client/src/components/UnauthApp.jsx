@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './Login';
 import Header from './Header';
 import Home from './Home';
+import SignUp from './SignUp';
 
 const UnauthApp = () => (
   <Router>
@@ -13,6 +14,9 @@ const UnauthApp = () => (
       </Route>
       <Route exact path="/login">
         <Login />
+      </Route>
+      <Route exact path="/signup">
+        <SignUp />
       </Route>
     </Switch>
   </Router>
