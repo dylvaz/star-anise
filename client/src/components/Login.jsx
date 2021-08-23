@@ -114,6 +114,7 @@ const Login = () => {
             </Grid>
           </Grid>
           <Divider className={classes.divider} />
+          {/* TODO use official styling */}
           <Button
             href="/auth/google"
             fullWidth
@@ -124,6 +125,7 @@ const Login = () => {
           >
             Sign in with Google
           </Button>
+          {/* TODO use official styling */}
           <Button
             href="/auth/facebook"
             component={Link}
