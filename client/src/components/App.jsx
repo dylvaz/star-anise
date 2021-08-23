@@ -1,24 +1,11 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import Home from './Home';
+import { useAuth } from '../hooks/useAuth';
+import AuthApp from './AuthApp';
+import UnauthApp from './UnauthApp';
 
-import Login from './Login';
+const App = () => {
+  const { user } = useAuth();
+  return user ? <AuthApp /> : <UnauthApp />;
+};
 
-export default () => (
-  <Router>
-    <div>
-      <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </div>
-  </Router>
-);
+export default App;
