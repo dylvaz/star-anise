@@ -33,6 +33,8 @@ const userSchema = new Schema({
   email,
   displayName: { type: String, required: true },
   avatar: String,
+}, {
+  timestamps: true,
 });
 
 // eslint-disable-next-line func-names
